@@ -28,17 +28,17 @@ values = [entry['value'] for entry in data] + [data[-1]['value']]
 # Create a numpy array for time_points and values
 time_array = np.array([0.0] + time_points)
 values_array = np.array([0.0] + values)
-
 # Define the interval duration
 interval_duration = 10.0  # seconds
 
-peaks, _ = find_peaks(values_array, height=0.0)
-valleys, _ = find_peaks(-values_array, height=0.0)
+peaks, _ = find_peaks(values_array, height=0.0, distance = interval_duration)
+
+print(time_array[peaks])
 
 # Plot the line graph with smaller red circles for peaks and smaller blue circles for valleys
 plt.plot(time_array, values_array, label='Data')
 plt.plot(time_array[peaks], values_array[peaks], 'ro', label='Peaks', markersize=3)
-plt.plot(time_array[valleys], values_array[valleys], 'yo', label='Valleys', markersize=3)
+# plt.plot(time_array[valleys], values_array[valleys], 'go', label='Valleys', markersize=3)
 plt.title('Peaks and Valleys for Each 10-second Interval')
 plt.xlabel('Time (seconds)')
 plt.ylabel('Value')
